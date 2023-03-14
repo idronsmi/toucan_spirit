@@ -1,9 +1,9 @@
-use serde::Deserialize;
+use serde::{Serialize, Deserialize};
 
 
 
 
-#[derive(Debug, sqlx::FromRow, Deserialize)]
+#[derive(Debug, sqlx::FromRow, Serialize, Deserialize)]
 pub struct Ingredient {
     pub ingredient_id: i64,
     pub name: String,
