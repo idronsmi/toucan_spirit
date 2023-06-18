@@ -12,7 +12,7 @@ CREATE TABLE tbl_recipe (
 
 CREATE TABLE tbl_ingredient (
     ingredient_id BIGINT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    name VARCHAR(20) NOT NULL,
+    name VARCHAR(50) NOT NULL,
     type VARCHAR(20) NOT NULL
 );
 
@@ -21,5 +21,5 @@ CREATE TABLE tbl_recipe_ingredient (
     recipe_id BIGINT REFERENCES tbl_recipe(recipe_id) NOT NULL,
     ingredient_id BIGINT REFERENCES tbl_ingredient(ingredient_id) NOT NULL,
     quantity INTEGER NOT NULL,
-    unit_of_easurement VARCHAR(10) NOT NULL
+    unit_of_measurement VARCHAR(10) NOT NULL
 );

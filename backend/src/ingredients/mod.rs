@@ -1,7 +1,4 @@
-use axum::{
-    extract::Query, http::StatusCode, response::IntoResponse, routing::get, Extension, Json, Router,
-};
-use sqlx::{PgPool, Postgres, QueryBuilder};
+use axum::{extract::Query, http::StatusCode, routing::get, Extension, Json, Router};
 
 use ingredient::Ingredient;
 
@@ -22,10 +19,9 @@ async fn get_ingredients(
     let query = String::from("SELECT ingredient_id, name, type FROM tbl_ingredient ");
     let paginated = pagination.make_query_string();
     let paginated_query = query + &paginated;
-    println!("{paginated_query}");
-    let sql =
-        sqlx::query_as::<_, Ingredient>(&paginated_query);
+
+    let sql = sqlx::query_as::<_, Ingredient>(&paginated_query);
     let ings = sql.fetch_all(&ctx.db).await.unwrap();
+
     Ok(Json(ings))
 }
-
