@@ -1,27 +1,27 @@
-use axum::{
- Router, Extension
-};
+use axum::{Extension, Router};
+use sqlx::PgPool;
 use std::net::SocketAddr;
 use tower::ServiceBuilder;
 
-mod pg;
 mod ingredients;
+mod pg;
+mod shared;
 
+#[derive(Clone)]
+struct ApiContext {
+    db: PgPool,
+}
 
 #[tokio::main]
 async fn main() {
     tracing_subscriber::fmt::init();
 
-    let pool = pg::initialize_pg().await.unwrap();
+    let db = pg::initialize_pg().await.unwrap();
 
     let app = Router::new()
-
-        .nest("/ingredients", ingredients::get_ingredients_routes()).layer(
-            ServiceBuilder::new()
-                .layer(Extension(pool))
-        );
-
-
+        .nest("/ingredients", ingredients::get_ingredients_routes())
+        .layer(ServiceBuilder::new().layer(Extension(ApiContext { db })));
+    // Enables logging. Use `RUST_LOG=tower_http=debug`
     let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
     tracing::debug!("listening on {}", addr);
     axum::Server::bind(&addr)

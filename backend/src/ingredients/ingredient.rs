@@ -1,7 +1,4 @@
-use serde::{Serialize, Deserialize};
-
-
-
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, sqlx::FromRow, Serialize, Deserialize)]
 pub struct Ingredient {

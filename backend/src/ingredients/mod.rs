@@ -1,8 +1,11 @@
-use axum::{Router, Extension,response::IntoResponse,
-    routing::{get}, Json};
-use sqlx::{PgPool};
+use axum::{
+    extract::Query, http::StatusCode, response::IntoResponse, routing::get, Extension, Json, Router,
+};
+use sqlx::{PgPool, Postgres, QueryBuilder};
 
 use ingredient::Ingredient;
+
+use crate::{shared::pagination::Pagination, ApiContext};
 
 mod ingredient;
 
@@ -11,7 +14,18 @@ pub fn get_ingredients_routes() -> Router {
     ingredients_router
 }
 
-async fn get_ingredients(Extension(pool): Extension<PgPool>) -> impl IntoResponse {
-    let ings = sqlx::query_as::<_, Ingredient>("SELECT ingredient_id, name, type FROM tbl_ingredient").fetch_all(&pool).await.unwrap();
-    Json(ings)
+async fn get_ingredients(
+    ctx: Extension<ApiContext>,
+    pagination: Option<Query<Pagination>>,
+) -> Result<Json<Vec<Ingredient>>, (StatusCode, String)> {
+    let Query(pagination) = pagination.unwrap_or_default();
+    let query = String::from("SELECT ingredient_id, name, type FROM tbl_ingredient ");
+    let paginated = pagination.make_query_string();
+    let paginated_query = query + &paginated;
+    println!("{paginated_query}");
+    let sql =
+        sqlx::query_as::<_, Ingredient>(&paginated_query);
+    let ings = sql.fetch_all(&ctx.db).await.unwrap();
+    Ok(Json(ings))
 }
+

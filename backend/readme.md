@@ -1,0 +1,8 @@
+ - podman pull postgres
+ - podman run \
+    --name toucan-spirit-pg \ 
+    -e POSTGRES_PASSWORD=dontusemeinproduction \
+    -e POSTGRES_DB=toucan_spirit \
+    -e POSTGRES_USER=toucan-spirit-sa \
+    -d postgres
+ - podman run --name toucan-spirit-pg -e POSTGRES_PASSWORD=dontusemeinproduction -e POSTGRES_DB=toucan_spirit -e POSTGRES_USER=toucan-spirit-sa --network=host -d postgres
