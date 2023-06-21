@@ -5,6 +5,7 @@ use tower::ServiceBuilder;
 
 mod ingredients;
 mod pg;
+mod recipes;
 mod shared;
 
 #[derive(Clone)]
@@ -19,7 +20,8 @@ async fn main() {
     let db = pg::initialize_pg().await.unwrap();
 
     let app = Router::new()
-        .nest("/ingredients", ingredients::get_ingredients_routes())
+        .nest("/ingredients", ingredients::ingredient_routes())
+        .nest("/recipes", recipes::recipe_routes())
         .layer(ServiceBuilder::new().layer(Extension(ApiContext { db })));
     // Enables logging. Use `RUST_LOG=tower_http=debug`
     let addr = SocketAddr::from(([127, 0, 0, 1], 3000));

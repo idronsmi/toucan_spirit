@@ -18,15 +18,15 @@ impl Default for Pagination {
 impl Pagination {
     pub fn make_query_string(&self) -> String {
         let limit = match self.limit {
-            Some(limit) => format!("LIMIT {limit}"),
-            None => "LIMIT 10".to_owned(),
+            Some(limit) => limit,
+            None => 10,
         };
 
         let offset = match self.offset {
-            Some(offset) => format!("OFFSET {offset}"),
-            None => "OFFSET 0".to_owned(),
+            Some(offset) => offset,
+            None => 0,
         };
 
-        format!("{limit} {offset}")
+        format!("LIMIT {limit} OFFSET {offset}")
     }
 }
