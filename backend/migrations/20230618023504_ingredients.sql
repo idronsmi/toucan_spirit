@@ -1,48 +1,44 @@
 -- Add migration script here
 INSERT INTO tbl_ingredient
-(name, type) 
+(ingredient_id,name, type) 
 VALUES
 /* Fruit */
-('Coconut Cream', 'Fruit'),
-('Grapefruit Juice', 'Fruit'),
-('Lime Juice', 'Fruit'),
-('Lemon Juice', 'Fruit'),
-('Orange Juice', 'Fruit'),
-('Pineapple Juice', 'Fruit'),
+(1, 'Coconut Cream', 'Fruit'),
+(2, 'Grapefruit Juice', 'Fruit'),
+(3, 'Lime Juice', 'Fruit'),
+(4, 'Lemon Juice', 'Fruit'),
+(5, 'Orange Juice', 'Fruit'),
+(6, 'Pineapple Juice', 'Fruit'),
 
 /* Spirits */
-('Bourbon', 'Spirit'),
-('Gin', 'Spirit'),
-('Mezcal', 'Spirit'),
-('Pisco', 'Spirit'),
-('Rum', 'Spirit'),
-('Tequila', 'Spirit'),
-('Whiskey', 'Spirit'),
+(7, 'Bourbon', 'Spirit'),
+(8, 'Gin', 'Spirit'),
+(9, 'Mezcal', 'Spirit'),
+(10, 'Pisco', 'Spirit'),
+(11, 'Rum', 'Spirit'),
+(12, 'Tequila', 'Spirit'),
+(13, 'Whiskey', 'Spirit'),
 
 /* Liqueur */
-('Aperol', 'Spirit'),
-('Allspice Dram', 'Spirit'),
-('Amaro Nonino Quintessentia', 'Spirit'),
-('Benedictine', 'Spirit'),
-('Blackberry Liqueur', 'Spirit'),
-('Campari', 'Spirit'),
-('Cherry Liqueur', 'Spirit'),
-('Orange Liqueur', 'Spirit'),
-('Peach Liqueur', 'Spirit'),
-('Velvet Falernum', 'Spirit'),
+(14, 'Aperol', 'Spirit'),
+(15, 'Allspice Dram', 'Spirit'),
+(16, 'Amaro Nonino Quintessentia', 'Spirit'),
+(17, 'Benedictine', 'Spirit'),
+(18, 'Blackberry Liqueur', 'Spirit'),
+(19, 'Campari', 'Spirit'),
+(20, 'Cherry Liqueur', 'Spirit'),
+(21, 'Orange Liqueur', 'Spirit'),
+(22, 'Peach Liqueur', 'Spirit'),
+(23, 'Velvet Falernum', 'Spirit'),
 
 /* Syrups */
-('Demerara Syrup', 'Syrup'),
-('Grenadine', 'Syrup'),
-('Orgeat', 'Syrup'),
-('Simple Syrup', 'Syrup'),
-('Passion Fruit Syrup', 'Syrup'),
-
+(24, 'Demerara Syrup', 'Syrup'),
+(25, 'Grenadine', 'Syrup'),
+(26, 'Orgeat', 'Syrup'),
+(27, 'Simple Syrup', 'Syrup'),
+(28, 'Passion Fruit Syrup', 'Syrup'),
 
 /* Bitters */
-('Agnostura Bitters', 'Bitters'),
-('Orange Bitters', 'Bitters'),
-('Peychauds Bitters', 'Bitters');
-
-
-
+(29, 'Agnostura Bitters', 'Bitters'),
+(30, 'Orange Bitters', 'Bitters'),
+(31, 'Peychauds Bitters', 'Bitters');
