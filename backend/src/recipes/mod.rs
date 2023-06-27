@@ -59,6 +59,6 @@ async fn get_recipe_ingredients(
 
     let sql = sqlx::query_as::<_, RecipeIngredient>(&query).bind(recipe_id);
     let ings = sql.fetch_all(&ctx.db).await.unwrap();
-
+ 
     Ok(Json(ings))
 }
