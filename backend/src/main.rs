@@ -33,7 +33,7 @@ async fn main() {
         .nest("/recipes", recipes::recipe_routes())
         .layer(ServiceBuilder::new().layer(Extension(ApiContext { db })))
         .merge(SwaggerUi::new("/swagger-ui").url("/api-docs/openapi.json", ApiDoc::openapi()));
-    // Enables logging. Use `RUST_LOG=tower_http=debug`
+    
     let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
     tracing::debug!("listening on {}", addr);
     axum::Server::bind(&addr)
