@@ -1,6 +1,8 @@
 use serde::Deserialize;
+use utoipa::IntoParams;
 
-#[derive(Deserialize, Debug)]
+#[derive(Deserialize, Debug, IntoParams)]
+#[into_params(parameter_in = Query)]
 pub struct Pagination {
     offset: Option<usize>,
     limit: Option<usize>,

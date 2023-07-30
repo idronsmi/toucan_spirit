@@ -2,7 +2,7 @@ use axum::{extract::Query, http::StatusCode, routing::get, Extension, Json, Rout
 
 use ingredient::Ingredient;
 
-use crate::{shared::pagination::Pagination, ApiContext};
+use crate::{shared, ApiContext};
 
 pub mod ingredient;
 
@@ -13,7 +13,7 @@ pub fn ingredient_routes() -> Router {
 
 async fn get_ingredients(
     ctx: Extension<ApiContext>,
-    pagination: Option<Query<Pagination>>,
+    pagination: Option<Query<shared::pagination::Pagination>>,
 ) -> Result<Json<Vec<Ingredient>>, (StatusCode, String)> {
     let Query(pagination) = pagination.unwrap_or_default();
     let paginated = pagination.make_query_string();
